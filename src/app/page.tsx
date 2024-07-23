@@ -34,7 +34,7 @@ export default function Home() {
             <PlayIcon className="size-6 text-black" />
             Detection
           </button>
-          <button className='md:text-xl; flex cursor-pointer items-center gap-x-2 rounded bg-gray-600 px-5 py-1.5 text-sm font-semibold text-black transition hover:opacity-75 md:px-8 md:py-2.5'>
+          <button className='md:text-xl; flex cursor-pointer items-center gap-x-2 rounded bg-gray-500 px-5 py-1.5 text-sm font-semibold text-black transition hover:opacity-75 md:px-8 md:py-2.5'>
             <InformationCircleIcon className="size-6 text-black" />
             More Info
           </button>
