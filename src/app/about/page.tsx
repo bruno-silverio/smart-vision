@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 
 import { CodeBracketIcon, AcademicCapIcon } from '@heroicons/react/24/solid'
@@ -30,20 +31,24 @@ function About() {
 
           <p className='text-shadow-md max-w-xs text-xs md:max-w-lg md:text-lg lg:max-w-1x1'>
             Esse site foi desenvolvido com o objetivo de automatizar a busca de veículos em arquivos de video.
-            Através da IA é feita a detecção dos veículos, placa e cor. Depois é realizado a consulta das placas
+            Através da IA é feita a detecção dos veículos, modelo e placa. Depois é realizado a consulta das placas
             onde é confrontado as informações para averiguar a situação dos veículos.
           </p>
         </div>
 
         <div className='flex space-x-4'>
-          <button className='md:text-xl; flex cursor-pointer items-center gap-x-2 rounded bg-white px-5 py-1.5 text-sm font-semibold text-black transition hover:opacity-75 md:px-8 md:py-2.5'>
-            <AcademicCapIcon className="size-6 text-black" />
-            LinkedIn
-          </button>
-          <button className='md:text-xl; flex cursor-pointer items-center gap-x-2 rounded bg-white px-5 py-1.5 text-sm font-semibold text-black transition hover:opacity-75 md:px-8 md:py-2.5'>
-            <CodeBracketIcon className="size-6 text-black" />
-            GitHub
-          </button>
+          <Link href='https://www.linkedin.com/in/bruno-silverio/'>
+            <button className='md:text-xl; flex cursor-pointer items-center gap-x-2 rounded bg-white px-5 py-1.5 text-sm font-semibold text-black transition hover:opacity-75 md:px-8 md:py-2.5'>
+              <AcademicCapIcon className="size-6 text-black" />
+              LinkedIn
+            </button>
+          </Link>
+          <Link href='https://github.com/bruno-silverio'>
+            <button className='md:text-xl; flex cursor-pointer items-center gap-x-2 rounded bg-white px-5 py-1.5 text-sm font-semibold text-black transition hover:opacity-75 md:px-8 md:py-2.5'>
+              <CodeBracketIcon className="size-6 text-black" />
+              GitHub
+            </button>
+          </Link>
         </div>
 
       </main>
