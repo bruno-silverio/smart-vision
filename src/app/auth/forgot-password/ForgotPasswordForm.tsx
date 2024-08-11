@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { InputField } from '@/app/components/InputField';
 
 export function ForgotPasswordForm() {
@@ -22,18 +23,27 @@ export function ForgotPasswordForm() {
 
       <InputField
         id='email'
+        name='name'
         type='email'
         label='Email'
         placeholder='Enter your email'
       />
 
-      <div className='flex flex-col-reverse space-y-2 pt-2 sm:flex-row sm:space-x-2 sm:space-y-0'>
+      <div className='flex flex-col space-y-2 pt-2 sm:flex-row sm:space-x-2 sm:space-y-0 justify-center items-center'>
         <button
-          className='flex w-full items-center justify-center rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600 sm:w-auto sm:px-8'
+          className='flex w-full items-center justify-start rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600 sm:w-auto sm:px-8'
           type='submit'
         >
           Reset Password
         </button>
+
+        <Link href="/auth/login" passHref legacyBehavior>
+          <button
+            className='flex w-full items-center justify-center rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600 sm:w-auto sm:px-8'
+          >
+            Cancel
+          </button>
+        </Link>
       </div>
     </form>
   );

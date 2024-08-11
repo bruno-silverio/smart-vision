@@ -29,10 +29,19 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
             {formType === 'login' ? 'Register' : 'Login'}
           </a>
         </p>
+        <p className='text-sm text-gray-50'>
+          <a
+            href='/auth/forgot-password'
+            className='text-red-500 hover:underline'
+          >
+            Forgot your password?
+          </a>
+        </p>
       </div>
       <div className='mt-8 flex flex-col space-y-4'>
         <InputField
           id='email'
+          name='email'
           type='email'
           label='Email'
           placeholder='Enter your email'
@@ -40,6 +49,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
 
         <InputField
           id='password'
+          name='password'
           type='password'
           label='Password'
           placeholder='Enter your password'
@@ -48,13 +58,14 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
         {formType === 'register' && (
           <InputField
             id='confirmPassword'
+            name='confirmPassword'
             type='password'
             label='Confirm Password'
             placeholder='Confirm your password'
           />
         )}
       </div>
-      <div className='flex flex-col-reverse space-y-2 pt-2 sm:flex-row sm:space-x-2 sm:space-y-0'>
+      <div className='flex flex-col space-y-2 pt-2 sm:flex-row sm:space-x-2 sm:space-y-0 justify-center items-center'>
         <button
           className='flex w-full items-center justify-center rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600 sm:w-auto sm:px-8'
           type='submit'
