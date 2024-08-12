@@ -1,5 +1,8 @@
 export interface DocumentData {
   title: string;
   description: string;
-  date: string;
+  image?: string;
+  fileURL: string;
+  createdAt: any;
+  date: string; 
 }

@@ -1,14 +1,41 @@
 'use client'
 
-import React from "react";
+import React, { useEffect, useState }  from "react";
 import Image from "next/image";
+
+import { getDocuments } from "@/app/lib/firebase/firestore";
 
 import Header from "./../components/Header";
 import RelatedArticles from "../components/RelatedArticles";
 import { SearchField } from "../components/SearchField";
 
+type Investigation = {
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  link: string;
+};
 
 export default function History() {
+  const [investigations, setInvestigations] = useState<Investigation[]>([]);
+
+  useEffect(() => {
+    const fetchInvestigations = async () => {
+      const docs = await getDocuments("investigations");
+      const investigationsData = docs.map(doc => ({
+        title: doc.title,
+        description: doc.description,
+        image: '/default-investigation.jpg',
+        date: new Date(doc.createdAt.seconds * 1000).toLocaleDateString(),
+        link: `/investigation/${doc.id}`,
+      }));
+      setInvestigations(investigationsData);
+    };
+
+    fetchInvestigations();
+  }, []);
+
   return (
     <div className='relative h-screen overflow-hidden bg-gradient-to-b lg:h-[140vh]'>
       <Header />
@@ -33,7 +60,7 @@ export default function History() {
               </div>
             </div>
 
-            <RelatedArticles />
+            <RelatedArticles investigation={investigations} />
           </div>
 
         </div>
