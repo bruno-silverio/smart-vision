@@ -1,7 +1,7 @@
-import { getAuth } from "firebase/auth";
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getAuth, signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import { initializeApp, getApps, getApp } from "firebase/app";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -19,7 +19,19 @@ const app = !getApps().length
 
 // Initialize Firebase services
 const auth = getAuth(app);
+const logout = async () => {
+  const auth = getAuth();
+  try {
+    await signOut(auth);
+    console.log('User signed out successfully');
+  } catch (error) {
+    console.error('Error signing out: ', error);
+  }
+};
+const user = auth.currentUser;
+const loggedInUserId = user?.uid;
+const loggedInUserName = user?.email
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-export { app, auth, db, storage };
+export { app, auth, logout, db, storage, loggedInUserId, loggedInUserName };
