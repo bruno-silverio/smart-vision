@@ -39,7 +39,7 @@ export function ForgotPasswordForm() {
 
         <Link href="/auth/login" passHref legacyBehavior>
           <button
-            className='flex w-full items-center justify-center rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600 sm:w-auto sm:px-8'
+            className='flex w-full items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold bg-slate-500 hover:bg-slate-600 text-white sm:w-auto sm:px-8'
           >
             Cancel
           </button>
