@@ -39,6 +39,15 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
         </p>
       </div>
       <div className='mt-8 flex flex-col space-y-4'>
+        {formType === 'register' && (
+          <InputField
+            id='name'
+            name='name'
+            type='name'
+            label='Name'
+            placeholder='Enter you name'
+          />
+        )}
         <InputField
           id='email'
           name='email'
@@ -46,7 +55,19 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
           label='Email'
           placeholder='Enter your email'
         />
-
+        {formType === 'register' && (
+          <>
+            <h2 className="mb-2 text-lg text-gray-900 dark:text-gray-50">Password requirements</h2>
+            <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                <li>
+                    At least 5 characters
+                </li>
+                <li>
+                    At least one lowercase character
+                </li>
+            </ul>
+          </>
+        )}
         <InputField
           id='password'
           name='password'
@@ -67,7 +88,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
       </div>
       <div className='flex flex-col space-y-2 pt-2 sm:flex-row sm:space-x-2 sm:space-y-0 justify-center items-center'>
         <button
-          className='flex w-full items-center justify-center rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600 sm:w-auto sm:px-8'
+          className='flex w-full items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold sm:w-auto sm:px-8 bg-blue-500 hover:bg-blue-700 text-white'
           type='submit'
         >
           {formType === 'login' ? 'Login' : 'Register'}

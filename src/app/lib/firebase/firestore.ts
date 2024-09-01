@@ -1,20 +1,47 @@
 import {
   getFirestore,
   collection,
+  doc,
+  setDoc,
   addDoc,
+  getDoc,
   getDocs,
   updateDoc,
   deleteDoc, 
-  doc, 
   DocumentReference, 
   serverTimestamp,
   DocumentData as FirestoreDocumentData 
 } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { db } from "./firebase";
 import { DocumentData } from "../types";
 
-// Initialize Firestore
-//const db = getFirestore(app);
+// Add a new user
+export const registerUser = async (name: string, email: string, password: string) => {
+  const auth = getAuth();
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    if (user) {
+      console.log("updateProfile in");
+      await updateProfile(user, { displayName: name });
+
+      await setDoc(doc(db, 'users', user.uid), {
+        email: user.email,
+        uid: user.uid,
+        name,
+      });
+      console.log("register user info: ", user.email, user.uid, name);
+    }
+
+    console.log('User registered:', user);
+  } catch (error) {
+    console.error('Error registering user:', error);
+    throw new Error('Failed to register user');
+  }
+};
 
 // Add a new document
 export const addDocument = async (collectionName: string, data: DocumentData): Promise<string | undefined> => {
@@ -31,28 +58,47 @@ export const addDocument = async (collectionName: string, data: DocumentData): P
 };
 
 // Get all documents
-export const getDocuments = async (collectionName: string): Promise<Array<DocumentData & { id: string }>> => {
+export const getDocuments = async (collectionName: string): Promise<Array<DocumentData>> => {
   try {
     const querySnapshot = await getDocs(collection(db, collectionName));
-    const documents: Array<DocumentData & { id: string }> = [];
+    const documents: Array<DocumentData> = [];
 
     querySnapshot.forEach((doc) => {
       const data = doc.data() as FirestoreDocumentData;
       documents.push({
-        id: doc.id,
+        investigationId: doc.id,
         title: data.title,
         description: data.description,
         image: '/default-image.jpg',
         date: data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown Date',
         fileURL: data.fileURL,
         createdAt: data.createdAt,
+        userId: data.userId,
       });
     });
 
     return documents;
   } catch (e) {
-    console.error("Error getting investigation: ", e);
-    throw new Error("Failed to retrieve investigation");
+    console.error("Error getting all investigations: ", e);
+    throw new Error("Failed to retrieve all investigations");
+  }
+};
+
+// Get a document
+export const getDocument = async (collectionName: string, id: string): Promise<FirestoreDocumentData | undefined> => {
+  try {
+    const docRef = doc(db, collectionName, id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data() as FirestoreDocumentData;
+    } else {
+      console.log("No such document!");
+      return undefined;
+    }
+  } catch (e) {
+    console.error("Error getting document:", e);
+    throw new Error("Failed to get document");
   }
 };
 
