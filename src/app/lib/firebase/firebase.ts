@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -28,10 +28,22 @@ const logout = async () => {
     console.error('Error signing out: ', error);
   }
 };
+const resetPassword = async (email: string) => {
+  const auth = getAuth();
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert('Password reset email sent!');
+  } catch (error) {
+    console.error('Error sending password reset email: ', error);
+    alert('Failed to send password reset email. Please try again.');
+  }
+};
+
 const user = auth.currentUser;
 const loggedInUserId = user?.uid;
 const loggedInUserName = user?.email
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-export { app, auth, logout, db, storage, loggedInUserId, loggedInUserName };
+export { app, auth, logout, resetPassword, db, storage, loggedInUserId, loggedInUserName };

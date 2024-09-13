@@ -1,12 +1,28 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
+import { sendPasswordResetEmail } from 'firebase/auth';
+
+import { auth } from '@/app/lib/firebase/firebase';
 import { InputField } from '@/app/components/InputField';
 
 export function ForgotPasswordForm() {
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [email, setEmail] = useState('');
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert('submit from forgot password');
+    if (email) {
+      try {
+        await sendPasswordResetEmail(auth, email);
+        alert('Password reset email sent! Please check your email.');
+      } catch (error) {
+        console.error('Error sending password reset email: ', error);
+        alert('Failed to send password reset email. Please try again.');
+      }
+    } else {
+      alert('Please enter a valid email address.');
+    }
   };
 
   return (
@@ -23,10 +39,12 @@ export function ForgotPasswordForm() {
 
       <InputField
         id='email'
-        name='name'
+        name='email'
         type='email'
         label='Email'
         placeholder='Enter your email'
+        value={email}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
       />
 
       <div className='flex flex-col space-y-2 pt-2 sm:flex-row sm:space-x-2 sm:space-y-0 justify-center items-center'>
