@@ -1,21 +1,19 @@
-export type InputFieldProps = {
+import React from 'react';
+
+export interface InputFieldProps {
   id: string;
   name: string;
   type: string;
   label: string;
   placeholder: string;
-};
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-export const InputField: React.FC<InputFieldProps> = ({
-  id,
-  name,
-  type,
-  label,
-  placeholder,
-}) => {
+export const InputField: React.FC<InputFieldProps> = ({ id, name, type, label, placeholder, value, onChange }) => {
   return (
-    <div className='flex flex-col space-y-1'>
-      <label htmlFor={id} className='text-sm font-semibold text-gray-500'>
+    <div className="flex flex-col">
+      <label htmlFor={id} className="text-sm font-semibold text-gray-200">
         {label}
       </label>
       <input
@@ -23,7 +21,9 @@ export const InputField: React.FC<InputFieldProps> = ({
         name={name}
         type={type}
         placeholder={placeholder}
-        className='rounded-lg border-gray-600 bg-gray-700 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-red-500'
+        value={value}
+        onChange={onChange}
+        className="mt-1 p-2 rounded bg-gray-800 text-gray-100 border border-gray-700 focus:outline-none focus:border-blue-500"
       />
     </div>
   );

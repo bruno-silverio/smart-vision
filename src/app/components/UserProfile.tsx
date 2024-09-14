@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
@@ -7,16 +8,26 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/app/lib/firebase/firebase';
 
 import ButtonLogout from './ButtonLogout';
+import UserSettings from './UserSettings';
 
 export const UserProfile = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [userName, setUserName] = useState<string | null>(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  //User name
+  const openSettings = () => {
+    setIsSettingsOpen(true);
+    setIsDropdownOpen(false);
+  };
+
+  const closeSettings = () => {
+    setIsSettingsOpen(false);
+  };
+
   useEffect(() => {
     const fetchUserName = async () => {
       try {
@@ -29,7 +40,7 @@ export const UserProfile = () => {
             const userData = userDocSnap.data();
             setUserName(userData.name || 'Unknown User');
           } else {
-            console.log('No such document!');
+            console.log('No user!');
           }
         }
       } catch (error) {
@@ -67,8 +78,13 @@ export const UserProfile = () => {
             <div>{userName}</div>
           </div>
           <ul className="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
-            <li className=" flex items-center justify-center py-1">
-              <a href="/settings" className="block px-4 py-1 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+            <li className="flex items-center justify-center py-1">
+              <button 
+                onClick={openSettings} 
+                className="px-4 py-1 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Settings
+              </button>
             </li>
             <div className="py-2 flex items-center justify-center">
               <ButtonLogout />
@@ -76,6 +92,9 @@ export const UserProfile = () => {
           </ul>
         </div>
       )}
+
+      {/* User Settings Modal */}
+      {isSettingsOpen && <UserSettings closeModal={closeSettings} />}
     </div>
   );
 };

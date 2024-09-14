@@ -1,4 +1,4 @@
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { app } from "./firebase";
 
 // Initialize Firebase Storage
@@ -25,6 +25,18 @@ export const getFileURL = async (userId: string, fileName: string): Promise<stri
   } catch (e) {
     console.error("Error getting file URL: ", e);
     throw new Error("Failed to get file URL");
+  }
+};
+
+// Delete a file to Firebase Storage
+export const deleteFile = async (fileURL: string): Promise<void> => {
+  try {
+    const fileRef = ref(storage, fileURL);
+    await deleteObject(fileRef);
+    console.log("Video deleted successfully: ", fileRef);
+  } catch (e) {
+    console.error("Error deleting video: ", e);
+    throw new Error("Failed to delete video");
   }
 };
 
