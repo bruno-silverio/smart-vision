@@ -1,8 +1,10 @@
 export interface DocumentData {
-  title: string;
-  description: string;
-  image?: string;
-  fileURL: string;
+  investigationId: string;
   createdAt: any;
-  date: string; 
+  description: string;
+  fileURL: string;
+  title: string;
+  userId: string;
+  image: any;
+  date: string;
 }
