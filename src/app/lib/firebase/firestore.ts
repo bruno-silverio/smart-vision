@@ -10,7 +10,8 @@ import {
   deleteDoc, 
   DocumentReference, 
   serverTimestamp,
-  DocumentData as FirestoreDocumentData 
+  DocumentData as FirestoreDocumentData,
+  QuerySnapshot,
 } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { db } from "./firebase";
@@ -121,6 +122,40 @@ export const deleteDocument = async (collectionName: string, id: string): Promis
   } catch (e) {
     console.error("Error deleting investigation: ", e);
     throw new Error("Failed to delete investigation");
+  }
+};
+
+// Search documents
+export const searchFirestore = async (searchTerm: string): Promise<Array<DocumentData>> => {
+  try {
+    const q = collection(db, 'investigations');
+    const querySnapshot: QuerySnapshot<FirestoreDocumentData> = await getDocs(q);
+    const documents: Array<DocumentData> = [];
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data() as FirestoreDocumentData;
+      // Filter documents based on the search term appearing anywhere in the title
+      if (
+        data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        data.description.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        documents.push({
+          investigationId: doc.id,
+          createdAt: data.createdAt,
+          description: data.description,
+          fileURL: data.fileURL,
+          title: data.title,
+          userId: data.userId,
+          image: '/default-investigation.jpg',
+          date: data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown Date',
+        });
+      }
+    });
+
+    return documents;
+  } catch (e) {
+    console.error("Error searching Firestore: ", e);
+    throw new Error("Failed to search Firestore");
   }
 };
 
