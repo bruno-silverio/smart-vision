@@ -3,36 +3,42 @@
 import React, { useEffect, useState }  from "react";
 import Image from "next/image";
 
-import { getDocuments } from "@/app/lib/firebase/firestore";
+import { getDocuments, searchFirestore } from "@/app/lib/firebase/firestore";
 
 import Header from "./../components/Header";
 import RelatedArticles from "../components/RelatedArticles";
 import { SearchField } from "../components/SearchField";
-
-type Investigation = {
-  title: string;
-  description: string;
-  image: string;
-  date: string;
-  link: string;
-};
+import { DocumentData } from "../lib/types";
 
 export default function History() {
-  const [investigations, setInvestigations] = useState<Investigation[]>([]);
+  const [investigations, setInvestigations] = useState<DocumentData[]>([]);
+
+  const fetchInvestigations = async () => {
+    const docs = await getDocuments("investigations");
+    const investigationsData = docs.map(doc => ({
+      investigationId: doc.investigationId,
+      title: doc.title,
+      description: doc.description,
+      image: '/default-investigation.jpg',
+      date: doc.createdAt ? new Date(doc.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown Date',
+      link: `/investigation/${doc.investigationId}`,
+      createdAt: doc.createdAt,
+      fileURL: doc.fileURL,
+      userId: doc.userId,
+    }));
+    setInvestigations(investigationsData);
+  };
+
+  const handleSearch = async (searchTerm: string) => {
+    if (searchTerm) {
+      const searchResults = await searchFirestore(searchTerm);
+      setInvestigations(searchResults);
+    } else {
+      fetchInvestigations();
+    }
+  };
 
   useEffect(() => {
-    const fetchInvestigations = async () => {
-      const docs = await getDocuments("investigations");
-      const investigationsData = docs.map(doc => ({
-        title: doc.title,
-        description: doc.description,
-        image: '/default-investigation.jpg',
-        date: new Date(doc.createdAt.seconds * 1000).toLocaleDateString(),
-        link: `/investigation/${doc.id}`,
-      }));
-      setInvestigations(investigationsData);
-    };
-
     fetchInvestigations();
   }, []);
 
@@ -56,7 +62,7 @@ export default function History() {
             <div className="mb-8">
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h2 className="text-3xl font-semibold text-white">Investigation history</h2>
-                <SearchField />
+                <SearchField onSearch={handleSearch} />
               </div>
             </div>
 
