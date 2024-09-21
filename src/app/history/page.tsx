@@ -6,6 +6,7 @@ import Image from "next/image";
 import { getDocuments, searchFirestore } from "@/app/lib/firebase/firestore";
 
 import Header from "./../components/Header";
+import Footer from "./../components/Footer";
 import RelatedArticles from "../components/RelatedArticles";
 import { SearchField } from "../components/SearchField";
 import { DocumentData } from "../lib/types";
@@ -71,6 +72,7 @@ export default function History() {
 
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

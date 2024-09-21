@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { AuthGuard } from "./components/AuthGuard";
 
 import { InformationCircleIcon } from '@heroicons/react/24/outline'
@@ -50,6 +51,7 @@ export default function Home() {
           </div>
 
         </main>
+        <Footer />
       </div>
     </AuthGuard>
   );

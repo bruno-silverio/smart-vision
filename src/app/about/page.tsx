@@ -6,6 +6,7 @@ import { CodeBracketIcon, AcademicCapIcon } from '@heroicons/react/24/solid'
 
 
 import Header from "./../components/Header";
+import Footer from "../components/Footer";
 
 function About() {
   return (
@@ -52,6 +53,7 @@ function About() {
         </div>
 
       </main>
+      <Footer />
     </div>
   );
 }

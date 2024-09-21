@@ -134,7 +134,7 @@ export const searchFirestore = async (searchTerm: string): Promise<Array<Documen
 
     querySnapshot.forEach((doc) => {
       const data = doc.data() as FirestoreDocumentData;
-      // Filter documents based on the search term appearing anywhere in the title
+      
       if (
         data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         data.description.toLowerCase().includes(searchTerm.toLowerCase())
