@@ -18,6 +18,7 @@ type RelatedArticlesProps = {
 };
 
 export default function RelatedArticles({ investigation }: RelatedArticlesProps) {
+
   const [authorName, setAuthorName] = useState<{ [key: string]: string }>({});
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
 
@@ -85,8 +86,7 @@ export default function RelatedArticles({ investigation }: RelatedArticlesProps)
     }
   };
 
-  // ARRUMAR
-  const handleEdit = async (id: string, investigationUserId: string) => {
+  const handleEdit = (id: string, investigationUserId: string) => {
     console.log('loggedInUserId: ',loggedInUserId);
     console.log('investigationUserId: ',investigationUserId);
     
@@ -97,14 +97,7 @@ export default function RelatedArticles({ investigation }: RelatedArticlesProps)
 
     const confirmed = confirm('Are you sure you want to edit this investigation?');
     if (confirmed) {
-      try {
-        //await updateDocument('investigations', id);
-        alert('Investigation edited successfully.');
-        window.location.reload();
-      } catch (error) {
-        console.error("Error deleting investigation:", error);
-        alert('Failed to edit the investigation. Please try again.');
-      }
+      window.location.href = `/investigation/edit/${id}`;
     }
   };
 
