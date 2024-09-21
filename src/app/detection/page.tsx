@@ -13,6 +13,7 @@ import { addDocument, getDocuments, updateDocument, deleteDocument } from "../li
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import Header from "./../components/Header";
+import Footer from "./../components/Footer"
 
 export default function Detection() {
   //video
@@ -82,10 +83,16 @@ export default function Detection() {
     }
   };
 
+  // Simulacao de como a api retorna as placas encontradas
+  const [vehiclePlates, setVehiclePlates] = useState([
+    { plate: "ABC1234", model: "Palio", color: "Preta", restriction: "Roubado", timestamp: "00:01:15" },
+    { plate: "ABC1D23", model: "Onix", color: "Amarelo", restriction: "", timestamp: "00:02:10" }
+  ]);
+
   return (
-    <div className='relative h-screen overflow-hidden bg-gradient-to-b lg:h-[140vh]'>
+    <div className='relative overflow-hidden bg-gradient-to-b lg:h-[170vh]'>
       <Header />
-      <main className={`relative pb-24 pl-4 lg:pl-16 ${isModalOpen ? 'blur-sm' : ''}`}>
+      <main className='relative pb-24 pl-4 lg:pl-16'>
         <div className='flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12'>
           
           <div className='absolute left-0 top-0 -z-10 h-[95vh] w-screen flex-col bg-gray-900'>
@@ -116,25 +123,24 @@ export default function Detection() {
                     ref={videoRef}
                     onChange={handleChange}
                   />
-
-                  <button 
-                    data-modal-target="crud-modal" 
-                    data-modal-toggle="crud-modal" 
-                    className="bg-blue-500 hover:bg-blue-700 text-white flex cursor-pointer items-center gap-x-2 rounded px-5 py-1.5 text-sm font-bold transition md:px-4" 
-                    type="button"
-                    onClick={toggleModal}
-                  >
-                    <CloudArrowUpIcon className="size-6"/>
-                    Save
-                  </button>
                 </div>
               </div>
 
-              <div className="bg-slate-400 mb-4">
-                <div className="aspect-w-16 aspect-h-9">
-                  {videoSrc && <video id="video-summary" controls src={videoSrc} />}
+              <div className="flex justify-center items-center h-full">
+                <div className="w-4/5 h-4/5 border border-gray-200 dark:border-gray-700 bg-slate-400 mb-4 flex justify-center items-center">
+                  <div className="relative w-full h-full aspect-w-16 aspect-h-9">
+                    {videoSrc && (
+                      <video
+                        id="video-summary"
+                        controls
+                        src={videoSrc}
+                        className="absolute top-0 left-0 w-full h-full object-cover"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
+
 
               <div className="flex justify-center items-center h-full">
                 <button 
@@ -152,56 +158,10 @@ export default function Detection() {
             </div>
 
             <hr className="border-t border-gray-300 my-8" />
-            <h1 className="text-2xl font-bold">Processing Data</h1>
+            <h1 className="text-2xl font-bold">Create New Investigation</h1>
             <div className="grid grid-cols-1 gap-x-1 gap-y-5 mt-4">
-              <div className="bg-slate-400 h-20">
-                <div className="m-4">
-                  <h4 className="text-lg font-medium">
-                    Frames
-                  </h4>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </main>
-
-      {
-        isModalOpen && (
-          <>
-            <div className="fixed inset-0 z-40 bg-black bg-opacity-50 backdrop-blur-sm"></div>
-            <div
-              id="crud-modal"
-              tabIndex={-1}
-              aria-hidden={!isModalOpen}
-              className={`${
-                isModalOpen ? 'flex' : 'hidden'
-              } overflow-y-auto overflow-x-hidden fixed inset-0 z-50 justify-center items-center`}
-              >
-              
-              <div className="relative p-4 w-full max-w-md max-h-full">
+              <div className="bg-slate-900">
                 
-                <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                  
-                  <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Create New Investigation
-                    </h3>
-                    <button 
-                      type="button"
-                      className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" 
-                      data-modal-toggle="crud-modal" 
-                      onClick={toggleModal}
-                    >
-                      <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                      </svg>
-                      <span className="sr-only">Close modal</span>
-                    </button>
-                  </div>
-                  
                   <form onSubmit={submitInvestigation} className="p-4 md:p-5">
                     <div className="grid gap-4 mb-4 grid-cols-2">
                       <div className="col-span-2">
@@ -227,6 +187,35 @@ export default function Detection() {
                           onChange={(e) => setDescription(e.target.value)}
                           ></textarea>                    
                       </div>
+
+                      <div className="col-span-2">
+                        <label htmlFor="description" className="block mb-2 text-sm font-medium text-white dark:text-white">Vehicle registrations</label>
+                        <div className="overflow-x-auto relative">
+                          <table className="min-w-full text-left text-sm text-white">
+                            <thead className="bg-sky-700 text-xs uppercase font-medium text-white">
+                              <tr>
+                                <th scope="col" className="px-6 py-3">Car model</th>
+                                <th scope="col" className="px-6 py-3">License plate</th>
+                                <th scope="col" className="px-6 py-3">Color</th>
+                                <th scope="col" className="px-6 py-3">Situation</th>
+                                <th scope="col" className="px-6 py-3">Video moment</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {vehiclePlates.map((plate, index) => (
+                                <tr key={index} className="border-b bg-gray-800 border-gray-700">
+                                  <td className="px-6 py-4">{plate.model}</td>
+                                  <td className="px-6 py-4">{plate.plate}</td>
+                                  <td className="px-6 py-4">{plate.color}</td>
+                                  <td className="px-6 py-4">{plate.restriction}</td>
+                                  <td className="px-6 py-4">{plate.timestamp}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
                     </div>
                     <button 
                       type="submit" 
@@ -237,13 +226,15 @@ export default function Detection() {
                       Add new investigation
                     </button>
                   </form>
-
-                </div>
+               
               </div>
             </div>
-          </>
-        )
-      }
+
+          </div>
+
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 }
