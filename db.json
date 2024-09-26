@@ -1,0 +1,42 @@
+{
+  "vehicles": [
+    {
+      "id": 1,
+      "placa": "GBR7497",
+      "Marca": "TOYOTA",
+      "Modelo": "YARIS HB XL 13 MT",
+      "Importado": "Não",
+      "Ano": 2019,
+      "AnoModelo": 2019,
+      "Cor": "Prata",
+      "Cilindrada": "1329 cc",
+      "Potencia": "101 cv",
+      "Combustivel": "Gasolina",
+      "Chassi": "*****5018988",
+      "Passageiros": 5,
+      "UF": "SP",
+      "Municipio": "SAO PAULO",
+      "Segmento": "Auto",
+      "EspecieVeiculo": "Passageiro"
+    },
+    {
+      "id": 2,
+      "placa": "XYZ1234",
+      "Marca": "FORD",
+      "Modelo": "KA",
+      "Importado": "Não",
+      "Ano": 2018,
+      "AnoModelo": 2018,
+      "Cor": "Preto",
+      "Cilindrada": "998 cc",
+      "Potencia": "85 cv",
+      "Combustivel": "Flex",
+      "Chassi": "*****567890",
+      "Passageiros": 5,
+      "UF": "RJ",
+      "Municipio": "RIO DE JANEIRO",
+      "Segmento": "Auto",
+      "EspecieVeiculo": "Passageiro"
+    }
+  ]
+}
