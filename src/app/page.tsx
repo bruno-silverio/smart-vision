@@ -5,13 +5,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { AuthGuard } from "./components/AuthGuard";
 
-import { InformationCircleIcon } from '@heroicons/react/24/outline'
-import { PlayIcon } from '@heroicons/react/24/solid'
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { PlayIcon } from '@heroicons/react/24/solid';
 
 export default function Home() {
   return (
     <AuthGuard>
-      <div className='relative h-screen overflow-hidden bg-gradient-to-b lg:h-[140vh]'>
+      <div className='relative h-screen overflow-hidden bg-gradient-to-b'>
         <Header />
         <main className='relative pb-24 pl-4 lg:pl-16'>
           <div className='flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12'>

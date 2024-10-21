@@ -19,6 +19,8 @@ const app = !getApps().length
 
 // Initialize Firebase services
 const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 const logout = async () => {
   const auth = getAuth();
   try {
@@ -30,7 +32,6 @@ const logout = async () => {
 };
 const resetPassword = async (email: string) => {
   const auth = getAuth();
-
   try {
     await sendPasswordResetEmail(auth, email);
     alert('Password reset email sent!');
@@ -40,10 +41,9 @@ const resetPassword = async (email: string) => {
   }
 };
 
+// Current logged-in user
 const user = auth.currentUser;
 const loggedInUserId = user?.uid;
 const loggedInUserName = user?.email
-const db = getFirestore(app);
-const storage = getStorage(app);
 
 export { app, auth, logout, resetPassword, db, storage, loggedInUserId, loggedInUserName };

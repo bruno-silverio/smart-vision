@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { InputField } from './InputField';
 
 type AuthFormProps = {
@@ -8,6 +9,11 @@ type AuthFormProps = {
 };
 
 export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   return (
     <form
       role='form'
@@ -43,9 +49,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
           <InputField
             id='name'
             name='name'
-            type='name'
+            type='text'
             label='Name'
-            placeholder='Enter you name'
+            placeholder='Enter your name'
+            value={name}
+            onChange={(e) => setName(e.target.value)} // Handle onChange
           />
         )}
         <InputField
@@ -54,6 +62,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
           type='email'
           label='Email'
           placeholder='Enter your email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)} // Handle onChange
         />
         {formType === 'register' && (
           <>
@@ -74,6 +84,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
           type='password'
           label='Password'
           placeholder='Enter your password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} // Handle onChange
         />
 
         {formType === 'register' && (
@@ -83,6 +95,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
             type='password'
             label='Confirm Password'
             placeholder='Confirm your password'
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)} // Handle onChange
           />
         )}
       </div>

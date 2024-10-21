@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { getDocuments, searchFirestore } from "@/app/lib/firebase/firestore";
 
+import { AuthGuard } from "./../components/AuthGuard";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import RelatedArticles from "../components/RelatedArticles";
@@ -27,7 +28,12 @@ export default function History() {
       fileURL: doc.fileURL,
       userId: doc.userId,
     }));
-    setInvestigations(investigationsData);
+
+    const orderInvestigation = investigationsData.sort((a, b) => {
+      return b.createdAt?.seconds - a.createdAt?.seconds;
+    });
+
+    setInvestigations(orderInvestigation);
   };
 
   const handleSearch = async (searchTerm: string) => {
@@ -44,35 +50,37 @@ export default function History() {
   }, []);
 
   return (
-    <div className='relative h-screen overflow-hidden bg-gradient-to-b lg:h-[140vh]'>
-      <Header />
-      <main className='relative pb-24 pl-4 lg:pl-16'>
-        <div className='flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12'>
-          
-          <div className='absolute left-0 top-0 -z-10 h-[95vh] w-screen flex-col bg-gray-900'>
-            <Image
-              src='/cop-wallpaper.jpg'
-              alt='Background image'
-              fill={true}
-              className='h-[65vh] object-cover object-top lg:h-[95vh] opacity-10'
-            />
-          </div>
-
-          <div className="mx-44 max-w-7x1">
-
-            <div className="mb-8">
-              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h2 className="text-3xl font-semibold text-white">Investigation history</h2>
-                <SearchField onSearch={handleSearch} />
-              </div>
+    <AuthGuard>
+      <div className='relative h-screen overflow-hidden bg-gradient-to-b lg:h-[140vh]'>
+        <Header />
+        <main className='relative pb-24 pl-4 lg:pl-16'>
+          <div className='flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12'>
+            
+            <div className='absolute left-0 top-0 -z-10 h-[95vh] w-screen flex-col bg-gray-900'>
+              <Image
+                src='/cop-wallpaper.jpg'
+                alt='Background image'
+                fill={true}
+                className='h-[65vh] object-cover object-top lg:h-[95vh] opacity-10'
+              />
             </div>
 
-            <RelatedArticles investigation={investigations} />
-          </div>
+            <div className="mx-44 max-w-7x1">
 
-        </div>
-      </main>
-      <Footer />
-    </div>
+              <div className="mb-8">
+                <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                  <h2 className="text-3xl font-semibold text-white">Investigation history</h2>
+                  <SearchField onSearch={handleSearch} />
+                </div>
+              </div>
+
+              <RelatedArticles investigation={investigations} />
+            </div>
+
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </AuthGuard>
   );
 }

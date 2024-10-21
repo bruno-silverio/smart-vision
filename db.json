@@ -2,7 +2,7 @@
   "vehicles": [
     {
       "id": 1,
-      "placa": "GBR7497",
+      "Placa": "GBR7497",
       "Marca": "TOYOTA",
       "Modelo": "YARIS HB XL 13 MT",
       "Importado": "Não",
@@ -17,11 +17,12 @@
       "UF": "SP",
       "Municipio": "SAO PAULO",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 2,
-      "placa": "XYZ1234",
+      "Placa": "XYZ1234",
       "Marca": "FORD",
       "Modelo": "KA",
       "Importado": "Não",
@@ -36,11 +37,12 @@
       "UF": "RJ",
       "Municipio": "RIO DE JANEIRO",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 3,
-      "placa": "FIQ5262",
+      "Placa": "FIQ5262",
       "Marca": "GM - CHEVROLET",
       "Modelo": "ONIX 1.0MT LT",
       "Importado": "Não",
@@ -56,11 +58,12 @@
       "UF": "SP",
       "Municipio": "CAMPINAS",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 4,
-      "placa": "ERA8285",
+      "Placa": "ERA8285",
       "Marca": "GM - CHEVROLET",
       "Modelo": "ONIX 10MT JOYE",
       "Importado": "Não",
@@ -76,11 +79,12 @@
       "UF": "SP",
       "Municipio": "CAMPINAS",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 5,
-      "placa": "FNF6312",
+      "Placa": "FNF6312",
       "Marca": "GM - CHEVROLET",
       "Modelo": "ONIX 1.4AT LTZ",
       "Importado": "Não",
@@ -96,11 +100,12 @@
       "UF": "SP",
       "Municipio": "CAMPINAS",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 6,
-      "placa": "GDQ8626",
+      "Placa": "GDQ8626",
       "Marca": "GM - CHEVROLET",
       "Modelo": "ONIX 1.0MT LT",
       "Importado": "Não",
@@ -116,11 +121,12 @@
       "UF": "SP",
       "Municipio": "CAMPINAS",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 7,
-      "placa": "APO6224",
+      "Placa": "APO6224",
       "Marca": "FIAT",
       "Modelo": "PALIO FIRE FLEX",
       "Importado": "Não",
@@ -136,11 +142,12 @@
       "UF": "SP",
       "Municipio": "CAMPINAS",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 8,
-      "placa": "HHT9986",
+      "Placa": "HHT9986",
       "Marca": "FIAT",
       "Modelo": "PALIO FIRE FLEX",
       "Importado": "Não",
@@ -156,11 +163,12 @@
       "UF": "SP",
       "Municipio": "CAMPINAS",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 9,
-      "placa": "DTV1875",
+      "Placa": "DTV1875",
       "Marca": "FIAT",
       "Modelo": "PALIO ELX FLEX",
       "Importado": "Não",
@@ -176,11 +184,12 @@
       "UF": "SP",
       "Municipio": "CAMPINAS",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 10,
-      "placa": "GRK9J91",
+      "Placa": "GRK9J91",
       "Marca": "FIAT",
       "Modelo": "PALIO FIRE FLEX",
       "Importado": "Não",
@@ -196,11 +205,12 @@
       "UF": "MG",
       "Municipio": "ANDRADAS",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 11,
-      "placa": "DXD1685",
+      "Placa": "DXD1685",
       "Marca": "FIAT",
       "Modelo": "PALIO FIRE FLEX",
       "Importado": "Não",
@@ -216,11 +226,12 @@
       "UF": "SP",
       "Municipio": "SUMARE",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
     },
     {
       "id": 12,
-      "placa": "EKN1922",
+      "Placa": "EKN1922",
       "Marca": "FIAT",
       "Modelo": "PALIO FIRE ECONOMY",
       "Importado": "Não",
@@ -236,7 +247,92 @@
       "UF": "SP",
       "Municipio": "HORTOLANDIA",
       "Segmento": "Auto",
-      "EspecieVeiculo": "Passageiro"
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
+    },
+    {
+      "id": 13,
+      "Placa": "QHM3I02",
+      "Marca": "FIAT",
+      "Modelo": "PALIO FIRE",
+      "Importado": "Não",
+      "Ano": 2015,
+      "AnoModelo": 2015,
+      "Cor": "Branca",
+      "Cilindrada": "1000 cc",
+      "Potencia": "75 cv",
+      "Combustivel": "Gasolina",
+      "Chassi": "*****7517474",
+      "Motor": "*****2387856",
+      "Passageiros": 5,
+      "UF": "PR",
+      "Municipio": "CRUZ MACHADO",
+      "Segmento": "Auto",
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
+    },
+    {
+      "id": 14,
+      "Placa": "ERB9J64",
+      "Marca": "FIAT",
+      "Modelo": "PALIO FIRE",
+      "Importado": "Não",
+      "Ano": 2010,
+      "AnoModelo": 2011,
+      "Cor": "Branca",
+      "Cilindrada": "1000 cc",
+      "Potencia": "75 cv",
+      "Combustivel": "Gasolina",
+      "Chassi": "*****5665921",
+      "Motor": "*****9650778",
+      "Passageiros": 5,
+      "UF": "SP",
+      "Municipio": "CAMPINAS",
+      "Segmento": "Auto",
+      "EspecieVeiculo": "Passageiro",
+      "Situation": ""
+    },
+    {
+      "id": 15,
+      "Placa": "FYZ5584",
+      "Marca": "GM - CHEVROLET",
+      "Modelo": "ONIX 1.0MT LS",
+      "Importado": "Não",
+      "Ano": 2015,
+      "AnoModelo": 2016,
+      "Cor": "Branca",
+      "Cilindrada": "1000 cc",
+      "Potencia": "80 cv",
+      "Combustivel": "Gasolina",
+      "Chassi": "*****G116678",
+      "Motor": "*****GSA5676",
+      "Passageiros": 5,
+      "UF": "SP",
+      "Municipio": "CAMPINAS",
+      "Segmento": "Auto",
+      "EspecieVeiculo": "Passageiro",
+      "Situation": "Furto"
+    },
+    {
+      "id": 16,
+      "Placa": "EGW8700",
+      "Marca": "FIAT",
+      "Modelo": "PALIO FIRE ECONOMY",
+      "Importado": "Não",
+      "Ano": 2009,
+      "AnoModelo": 2010,
+      "Cor": "Prata",
+      "Cilindrada": "1000 cc",
+      "Potencia": "75 cv",
+      "Combustivel": "Gasolina",
+      "Chassi": "*****G116678",
+      "Motor": "*****GSA5676",
+      "Passageiros": 5,
+      "UF": "SP",
+      "Municipio": "CAMPINAS",
+      "Segmento": "Auto",
+      "EspecieVeiculo": "Passageiro",
+      "Situation": "Roubo"
     }
   ]
 }

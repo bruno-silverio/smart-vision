@@ -105,10 +105,10 @@ export default function RelatedArticles({ investigation }: RelatedArticlesProps)
     <div className="bg-gray-900 py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {investigation.map((investigation) => (
-          <div key={investigation.investigationId} className="bg-white rounded-lg overflow-hidden shadow-md">
+          <div key={investigation.investigationId} className="bg-white rounded-lg overflow-hidden shadow-md flex flex-col h-full">
               <Link href={`/investigation/${investigation.investigationId}`} className="text-blue-600 hover:underline">
                 <Image src={investigation.image} alt={investigation.title} width={400} height={250} className="w-full object-cover"/>
-                <div className="p-4">
+                <div className="p-4 flex-grow">
                   <h3 className="text-xl font-bold mb-2">{investigation.title}</h3>
                   <p className="text-gray-700 mb-4 truncate">{investigation.description}</p>
                   Created: {investigation.date}
@@ -116,29 +116,32 @@ export default function RelatedArticles({ investigation }: RelatedArticlesProps)
                   Autor: {authorName[investigation.userId] || 'Unknown'}
                 </div>
               </Link>
-              <div className="flex items-center justify-between md:p-2 dark:border-gray-600">
-                <button 
-                  data-modal-target="crud-modal" 
-                  data-modal-toggle="crud-modal" 
-                  className="bg-blue-500 hover:bg-blue-700 text-white flex cursor-pointer items-center gap-x-2 rounded px-5 py-1.5 text-sm font-bold transition md:px-4" 
-                  type="button"
-                  onClick={() => handleEdit(investigation.investigationId, investigation.userId)}
-                >
-                  <PencilIcon className="size-6"/>
-                  Edit
-                </button>
-                
-                <button 
-                  data-modal-target="crud-modal" 
-                  data-modal-toggle="crud-modal" 
-                  className="bg-blue-500 hover:bg-blue-700 text-white flex cursor-pointer items-center gap-x-2 rounded px-5 py-1.5 text-sm font-bold transition md:px-4" 
-                  type="button"
-                  onClick={() => handleDelete(investigation.investigationId, investigation.userId, investigation.fileURL)}
-                >
-                  <TrashIcon className="size-6"/>
-                  Delete
-                </button>
+              <div className="mt-auto p-4 border-t border-gray-200">
+                <div className="flex items-center justify-between md:p-2 dark:border-gray-600 ">
+                  <button 
+                    data-modal-target="crud-modal" 
+                    data-modal-toggle="crud-modal" 
+                    className="bg-blue-500 hover:bg-blue-700 text-white flex cursor-pointer items-center gap-x-2 rounded px-5 py-1.5 text-sm font-bold transition md:px-4" 
+                    type="button"
+                    onClick={() => handleEdit(investigation.investigationId, investigation.userId)}
+                  >
+                    <PencilIcon className="size-6"/>
+                    Edit
+                  </button>
+                  
+                  <button 
+                    data-modal-target="crud-modal" 
+                    data-modal-toggle="crud-modal" 
+                    className="bg-blue-500 hover:bg-blue-700 text-white flex cursor-pointer items-center gap-x-2 rounded px-5 py-1.5 text-sm font-bold transition md:px-4" 
+                    type="button"
+                    onClick={() => handleDelete(investigation.investigationId, investigation.userId, investigation.fileURL)}
+                  >
+                    <TrashIcon className="size-6"/>
+                    Delete
+                  </button>
+                </div>
               </div>
+              
           </div>
         ))}
       </div>
