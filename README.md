@@ -75,8 +75,9 @@ After starting the frontend and backend applications, simply access 'localhost' 
 - [@matiasfilho](https://www.linkedin.com/in/jmlf1981/)
 
 ## 🔗 Links
-* [🔍 Roboflow - Car Models](https://universe.roboflow.com/cardetection-lwoni/car-models-lir65)
-* [🔍 JSON Server](https://github.com/typicode/json-server/tree/v0)
+🔍 [Roboflow - Car Models](https://universe.roboflow.com/cardetection-lwoni/car-models-lir65)  
+🔍 [License Plate Detection using YOLOv8](https://github.com/Muhammad-Zeerak-Khan/Automatic-License-Plate-Recognition-using-YOLOv8)  
+🔍 [JSON Server](https://github.com/typicode/json-server/tree/v0)
 
 ##
 <p align="center">
