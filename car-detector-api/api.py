@@ -11,12 +11,11 @@ from flask_cors import CORS
 from ultralytics import YOLO
 
 # Initialize the easyOCR reader for English
-reader = easyocr.Reader(['en'], gpu=False)  # Create a reader object for English
+reader = easyocr.Reader(['en'], gpu=False)
 
 app = Flask(__name__)
 CORS(app)
 
-# Load YOLOv8 models for car model detection and license plate detection
 car_model_detector = YOLO('car_model_detector.pt')
 license_plate_detector = YOLO('license_plate_detector.pt')
 
@@ -26,17 +25,17 @@ car_labels = {
     1: "Palio"
 }
 
-# Helper function to convert frame number to timestamp (without milliseconds)
+# Function to convert frame number to timestamp (without milliseconds)
 def frame_to_timecode(frame_number, fps):
     total_seconds = int(frame_number / fps)
     return str(timedelta(seconds=total_seconds))
 
-# Helper function to validate license plate format
+# Function to validate license plate format
 def is_valid_license_plate(plate_text):
     pattern = re.compile(r'^[A-Z]{3}[0-9]{1}[A-Z]{1}[0-9]{2}$|^[A-Z]{3}[0-9]{4}$') # "ABC1D23" or "XYZ1234" formats
     return bool(pattern.match(plate_text))
 
-# Helper function to draw bounding boxes with labels
+# Function to draw bounding boxes with labels
 def draw_labelled_box(frame, label, confidence, box_coords, color):
     x1, y1, x2, y2 = map(int, box_coords)
     text = f"{label} {confidence:.2f}"
@@ -62,7 +61,7 @@ def read_license_plate(license_plate_crop):
     detections = reader.readtext(license_plate_crop)
     for detection in detections:
         _, plate_text, _ = detection
-        plate_text = plate_text.upper().replace(' ', '')  # Clean up the text
+        plate_text = plate_text.upper().replace(' ', '')
         if is_valid_license_plate(plate_text):
             return plate_text
     return None
@@ -75,7 +74,7 @@ def validate_plate_and_model(plate_text, car_model):
             vehicles = response.json()
             for vehicle in vehicles:
                 if vehicle['Placa'] == plate_text and car_model.lower() in vehicle['Modelo'].lower():
-                    # Retorna as informações com adicionais: Cor e Situation
+                    # Returns information with additional details: Color and Situation
                     return True, vehicle['Cor'], vehicle.get('Situation', 'Indefinida')
         return False, None, None
     except Exception as e:
@@ -118,8 +117,8 @@ def analyze_video():
     video_path = os.path.join(folder_name, "temp_video.mp4")
     processed_video_path = os.path.join(folder_name, "processed_video.mp4")
     txt_output_path = os.path.join(folder_name, "log_frame_detections.txt")
-    json_output_path = os.path.join(folder_name, "log_detections.json")  # New JSON log file
-    h264_video_path = os.path.join(folder_name, "processed_video_h264.mp4")  # Output path for H.264 video
+    json_output_path = os.path.join(folder_name, "log_detections.json")
+    h264_video_path = os.path.join(folder_name, "processed_video_h264.mp4")
 
     try:
         # Save the uploaded video
@@ -252,18 +251,19 @@ def analyze_video():
         with open(json_output_path, 'w') as json_file:
             json.dump(json_log, json_file, indent=4)
 
-        # Clean up the temporary uploaded video?
+        # Clean up the temporary uploaded video
         if os.path.exists(video_path):
             os.remove(video_path)
+            os.remove(processed_video_path)
 
-        # Get the subdirectory name (e.g., "processed_video_07102024_1103")
+        # Get the subdirectory name (e.g., "processed_video_DDMMYYYY_HHMM")
         subdir = os.path.basename(folder_name)
 
         # Return the processed video URL and log file URL
         return jsonify({
             "message": "Video processed successfully",
-            "processed_video_path": f"processed_videos_folder/{subdir}/processed_video_h264.mp4",  # Correct URL for processed video
-            "detection_log": f"/processed_videos_folder/{subdir}/log_detections.txt",  # Return log path as well
+            "processed_video_path": f"processed_videos_folder/{subdir}/processed_video_h264.mp4",
+            "detection_log": f"/processed_videos_folder/{subdir}/log_detections.txt",
             "json_log": f"/processed_videos_folder/{subdir}/log_detections.json"
         })
 
