@@ -27,10 +27,6 @@
   ### General System Architecture
   
   <img src="https://github.com/user-attachments/assets/545b3e04-224c-49b5-ac3a-0536063a96bb" />
-  
-  ### Detection Operation
-  
-  <img src="" />
 
 </div>
 
