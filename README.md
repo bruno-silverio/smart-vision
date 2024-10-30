@@ -39,21 +39,21 @@
 How to run (Open 3 terminals for better viewing)
 
 #### 1. Next.js
-./smart-vision >
+./smart-vision/nextjs >
 ```bash 
 npm run dev
 ```
 > http://localhost:3000
 
 #### 2. Flask API
-./car-detector-api >
+./smart-vision/car-detector-api >
 ```bash 
 python3 api.py
 ```
 > http://localhost:5000
 
 #### 3. JSON Server
-./smart-vision >
+./smart-vision/nextjs >
 ```bash 
 npx json-server --watch db.json -p 3333
 ```
