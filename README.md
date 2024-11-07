@@ -4,7 +4,11 @@
   
 </div>
 
-### Project: Car Detection System using Artificial Intelligence.
+<div align="center">
+  
+  ### Video analysis with artificial intelligence for vehicle model and license plate detection
+  
+</div>
 
 - Investigation management / detection processing
 - Next.js (Web Application)
