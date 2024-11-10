@@ -70,7 +70,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType, onSubmit }) => {
             <h2 className="mb-2 text-lg text-gray-900 dark:text-gray-50">Password requirements</h2>
             <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
                 <li>
-                    At least 5 characters
+                    At least 6 characters
                 </li>
                 <li>
                     At least one lowercase character
