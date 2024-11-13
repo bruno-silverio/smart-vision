@@ -94,9 +94,9 @@ export default function Detection() {
       // Atualiza o estado da tabela com os veículos detectados
       setDetectedPlates(detectedVehicles);
   
-      alert(`Video processed successfully. 
-        Processed video: ${videoUrl} 
-        Detection log: ${logUrl}`);
+      alert('Video processed successfully!');
+      //Processed video: ${videoUrl} 
+      //Detection log: ${logUrl}
   
     } catch (error) {
       console.error('Error processing video:', error);
@@ -149,6 +149,7 @@ export default function Detection() {
       return;
     }
 
+    console.log('Wait...');
     try {
       // Extrai o nome da pasta do caminho retornado pela API
       const videoPath = processedVideoSrc.split("/").slice(-2, -1)[0]; // Exemplo: "processed_video_14102024_1422"
